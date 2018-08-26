@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assests/css/style.css">
+    <link rel="stylesheet" href="assests/css/reset.css">
+    <title>Star Wars RPG Game</title>
+</head>
+
+<body style="background-image: url(assests/images/connectwork.png)">
+
+    <div class="container">
+        <div id="pickarea" style="margin-left: 10px;" class="row">
+            <div id="imageblock1" style="background: aliceblue;border: 2px solid black;" class="char card border-primary mb-3" style="max-width: 12rem;">
+                <div style="display: inline" class="card-body">
+                    <div style="display: inline;">
+                        <h4 style="text-align: center;color:black;">Obi-Wan Kenobi</h4>
+                        <img  src="assests/images/obi.jpg" alt="">
+                        <h4 id="obihp" style="text-align: center;color:black;"></h4>
+                    </div>
+                </div>
+            </div>
+            <div id="imageblock2" style="background: aliceblue;border: 2px solid black;" class="char card border-primary mb-3" style="max-width: 12rem;">
+                <div style="display: inline" class="card-body">
+                    <div style="display: inline;">
+                        <h4 style="text-align: center;color:black;">Luke Skywalker</h4>
+                        <img  src="assests/images/luke.jpg" alt="">
+                        <h4 id="lukehp" style="text-align: center;color:black;"></h4>
+                    </div>
+                </div>
+            </div>
+            <div id="imageblock3" style="background: aliceblue;border: 2px solid black;" class="char card border-primary mb-3" style="max-width: 12rem;">
+                <div style="display: inline" class="card-body">
+                    <div style="display: inline;">
+                        <h4 style="text-align: center;color:black;">Darth Vader</h4>
+                        <img  src="assests/images/vader.jpg" alt="">
+                        <h4 id="vaderhp" style="text-align: center;color:black;"></h4>
+                    </div>
+                </div>
+            </div>
+            <div id="imageblock4" style="background: aliceblue;border: 2px solid black;" class="char card border-primary mb-3" style="max-width: 12rem;">
+                <div style="display: inline" class="card-body">
+                    <div style="display: inline;">
+                        <h4 style="text-align: center;color:black;">Darth Maul</h4>
+                        <img src="assests/images/maul.jpg" alt="">
+                        <h4 id="maulhp" style="text-align: center;color:black;"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-left: 10px;" class="row">
+            <div style="background:rgba(0, 0, 0, 0);border: none" class="card border-primary mb-3" style="max-width: 18rem;">
+                <div style="border: none;" class="card-header">
+                    <h3 style="color:antiquewhite">
+                        <strong>Your Character</strong>
+                    </h3>
+                </div>
+                <div id="characterarea" style="display: inline" class="card-body">
+
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-left: 10px;" class="row">
+            <div style="background:rgba(0, 0, 0, 0);border: none" class="card border-primary mb-3" style="max-width: 18rem;">
+                <div style="border: none;" class="card-header">
+                    <h3 style="color:antiquewhite">
+                        <strong>Enemies Available to Attack</strong>
+                    </h3>
+                </div>
+                <div id="attackarea" style="display: inline-flex" class="card-body">
+
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-left: 10px;" class="row">
+            <div style="background:rgba(0, 0, 0, 0);border: none" class="card border-primary mb-3" style="max-width: 18rem;">
+                <div style="border: none;" class="card-header">
+                    <h3 style="color:antiquewhite">
+                        <strong>Fight Section</strong>
+                    </h3>
+                    <button id="attackbtn" type="button" class="btn btn-dark">Attack</button>
+                    <h3 style="color:antiquewhite">
+                        <strong>Defender</strong>
+                    </h3>
+                </div>
+                <div id="defenderarea" style="display: inline" class="card-body">
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div style="margin-left: 20px;margin-bottom: 60px;" class="row">
+            <h4 id="yourdamage">
+
+            </h4>
+            <h4 id="enemydamage">
+
+            </h4>
+            <button id="resetbtn" type="button" class="btn btn-danger">Reset</button>
+        </div>
+
+
+    </div>
+
+    <div class="footer">
+            <div class="container">
+                <a href="#">Ying Wang&copy;</a>
+
+            </div>
+        </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="assests/javascript/game.js"></script>
+</body>
+
+</html>
