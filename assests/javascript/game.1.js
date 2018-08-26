@@ -104,9 +104,7 @@ var maul = {
 // link objects to images
 
 $("#imageblock1").attr({
-    "name": "Obi-Wan Kenobi",
     "HP": 120,
-    "_HP": $("#obihp"),
     "AP": 8,
     "APincrease": 8,
     "CAP": 8,
@@ -117,9 +115,7 @@ $("#imageblock1").attr({
 });
 
 $("#imageblock2").attr({
-    "name": "Luke Skywalker",
     "HP": 100,
-    "_HP": $("#lukehp"),
     "AP": 5,
     "APincrease": 5,
     "CAP": 5,
@@ -130,9 +126,7 @@ $("#imageblock2").attr({
 });
 
 $("#imageblock3").attr({
-    "name": "Darth Vader",
     "HP": 150,
-    "_HP": $("#vaderhp"),
     "AP": 20,
     "APincrease": 20,
     "CAP": 20,
@@ -143,9 +137,7 @@ $("#imageblock3").attr({
 });
 
 $("#imageblock4").attr({
-    "name": "Darth Maul",
     "HP": 180,
-    "_HP": $("#maulhp"),
     "AP": 25,
     "APincrease": 25,
     "CAP": 25,
@@ -158,27 +150,25 @@ $("#imageblock4").attr({
 // this is reset button function   need to create a ID with resetbtn TO make this functional
 document.getElementById('imageblock2')
 $("#resetbtn").on("click", function () {
-
-
-    document.getElementById('pickarea').append(
+    document.getElementById('pickarea').appendChild(
         document.getElementById('imageblock1')
     );
-    document.getElementById('pickarea').append(
+    document.getElementById('pickarea').appendChild(
         document.getElementById('imageblock2')
     );
-    document.getElementById('pickarea').append(
+    document.getElementById('pickarea').appendChild(
         document.getElementById('imageblock3')
     );
-    document.getElementById('pickarea').append(
+    document.getElementById('pickarea').appendChild(
         document.getElementById('imageblock4')
     );
 
     characterarea = [];
     attackarea = [];
     defenderarea = [];
-    // $characterarea.textContent = characterarea;
-    // $attackarea.textContent = attackarea;
-    // $defenderarea.textContent = defenderarea;
+    $characterarea.textContent = characterarea;
+    $attackarea.textContent = attackarea;
+    $defenderarea.textContent = defenderarea;
     gameRunning = false;
     isCharacterSelected = false;
     isEnemyDefeated = false;
@@ -205,10 +195,8 @@ $("#resetbtn").on("click", function () {
 
 //     })
 // }
-var youPick = null;
-var youBeat = null;
-var num_enermies = 3;
-
+var youPick;
+var youBeat;
 // create event listeners for characters images are clicked
 $(".char").on("click", function () {
     if (!isCharacterSelected) {
@@ -233,73 +221,22 @@ $(".char").on("click", function () {
     }
 })
 
-
-var yourHP = null;
-var enemyHP = null;
-var yourAP = null;
-
 $("#attackbtn").on("click", function () {
     if (isCharacterSelected && isDefenderSelected) {
-
-        yourHP = parseInt($(youPick).attr("HP"));
-        enemyHP = parseInt($(youBeat).attr("HP"));
-        yourAP = parseInt($(youPick).attr("AP"));
-        enemyCAP = parseInt($(youBeat).attr("CAP"));
-
-
-        enemyHP -= yourAP;
-        $(youBeat).attr("HP", enemyHP.toString());
-        $(youBeat).attr("_HP").textContent = enemyHP.toString();
-
-        console.log(yourHP);
-        console.log(yourAP);
-        console.log(enemyHP);
-        console.log(enemyCAP);
-        console.log(enemyHP <= 0);
-        console.log(num_enermies);
-
-
-        if (enemyHP <= 0) { // you defeat the enemy
-            // check if all enemies are down
-            num_enermies -= 1;
-            if (num_enermies <= 0) {
-                $yourdamage.innerHTML = "";
-                $enemydamage.innerHTML = "";
-                $yourdamage.innerHTML = "You Won!!! GAME OVER!!!"
-            }
-            // message of defeating a single enemy
-            else {
-                $yourdamage.innerHTML = "";
-                $enemydamage.innerHTML = "";
-                $yourdamage.innerHTML = "You have defeated " + youBeat.attr("name") + ", you can choose to fight another enemy.";
-
-            }
-            // remove imageblock in defender area
-            $('#defenderarea').empty();
-            // defender is back ready to be selected
-            isDefenderSelected = false;
-        }
-        else { // enemy is not down yet
-            $yourdamage.innerHTML = "";
-            $enemydamage.innerHTML = "";
+        var yourHP = $(youPick).attr("HP");
+        var enemyHP = $(youBeat).attr("HP");
+        var yourCAP = $(youPick).attr("CAP");
+        var enemyCAP = $(youBeat).attr("CAP");
+        var yourAP = $(youPick).attr("AP");
+        var enemyAP = $(youBeat).attr("AP");
+        if (yourHP > 0 && enemyHP > 0) {
             yourHP -= enemyCAP;
-            $(youPick).attr("HP", yourHP.toString());
-            $(youPick).attr("_HP").textContent = yourHP.toString();
-
-            if (yourHP <= 0) { // you are defeated by the enemy
-                $yourdamage.innerHTML = "";
-                $enemydamage.innerHTML = "";
-                $yourdamage.innerHTML = "You been Defeated GAME OVER!!!"
-            }
-            else {
-                $yourdamage.innerHTML = "";
-                $enemydamage.innerHTML = "";
-                $yourdamage.innerHTML = "You attacked " + $(youBeat).attr("name") + " for " + yourAP.toString() + " damage."
-                $enemydamage.innerHTML = $(youBeat).attr("name") + " attacked you back for " + enemyCAP.toString() + " damage."
-            }
+            enemyHP -= yourCAP;
+            yourCAP += yourAP;
+            $(yourHP).attr("HP", yourHP);
+            $(enemyHP).attr("HP", enemyHP);
+            $(yourHP).append(yourHP);
         }
-        // your AP increases for the next round
-        yourAP += parseInt($(youPick).attr("APincrease"))
-        $(youPick).attr("AP", yourAP.toString());
     }
+
 })
