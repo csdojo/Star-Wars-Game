@@ -32,6 +32,7 @@ var pickarea;
 var characterarea = [];
 var attackarea = [];
 var defenderarea = [];
+var defeatedEnemies = [];
 
 var yourdamage = "";
 var enemydamage = "";
@@ -42,17 +43,6 @@ var isCharacterSelected = false;
 var isDefenderSelected = false;
 var isEnemyDefeated = false;
 
-// Attack power
-var obiAP = 8;
-var lukeAP = 5;
-var daverAP = 20;
-var maulAP = 25;
-
-// Counter Attack Power
-var obiCAP = 0;
-var lukeCAP = 0;
-var daverCAP = 0;
-var maulCAP = 0;
 
 //four characters' objects 
 
@@ -157,7 +147,9 @@ $("#imageblock4").attr({
 
 // this is reset button function   need to create a ID with resetbtn TO make this functional
 document.getElementById('imageblock2')
-$("#resetbtn").on("click", function () {
+
+function reset() {
+
 
 
     document.getElementById('pickarea').append(
@@ -173,6 +165,20 @@ $("#resetbtn").on("click", function () {
         document.getElementById('imageblock4')
     );
 
+    obihp = 120;
+    $obihp.textContent = obihp;
+
+
+    lukehp = 100;
+    $lukehp.textContent = lukehp;
+
+
+    vaderhp = 150;
+    $vaderhp.textContent = vaderhp;
+
+
+    maulhp = 180;
+    $maulhp.textContent = maulhp;
     characterarea = [];
     attackarea = [];
     defenderarea = [];
@@ -185,7 +191,7 @@ $("#resetbtn").on("click", function () {
     isDefenderSelected = false;
 
 
-})
+}
 
 // function resetbtn() {
 //     var resetbtn = $("<button>");
@@ -221,6 +227,7 @@ $(".char").on("click", function () {
         for (var i = 0; i < restof.length; i++) {
             document.getElementById('attackarea').appendChild(restof[i]);
             $(restof[i]).attr("isEnemy", true);
+
         }
     } else if (!isDefenderSelected) {
         document.getElementById('defenderarea').append(this);
@@ -248,8 +255,13 @@ $("#attackbtn").on("click", function () {
 
 
         enemyHP -= yourAP;
+        console.log(youBeat);
+        console.log
         $(youBeat).attr("HP", enemyHP.toString());
-        $(youBeat).attr("_HP").textContent = enemyHP.toString();
+        youBeat.find('h4').last().text(enemyHP.toString());
+        youPick.find('h4').last().text(yourHP.toString());
+        // $(youBeat).attr("_HP").textContent = enemyHP.toString();
+
 
         console.log(yourHP);
         console.log(yourAP);
@@ -265,13 +277,18 @@ $("#attackbtn").on("click", function () {
             if (num_enermies <= 0) {
                 $yourdamage.innerHTML = "";
                 $enemydamage.innerHTML = "";
-                $yourdamage.innerHTML = "You Won!!! GAME OVER!!!"
+                $yourdamage.innerHTML = "You Won!!! GAME OVER!!!";
+                $("#resetbtn").on("click", reset);
+                reset();
+
             }
             // message of defeating a single enemy
             else {
                 $yourdamage.innerHTML = "";
                 $enemydamage.innerHTML = "";
                 $yourdamage.innerHTML = "You have defeated " + youBeat.attr("name") + ", you can choose to fight another enemy.";
+                yourHP = 120;
+                youPick.find('h4').last().text(yourHP.toString());
 
             }
             // remove imageblock in defender area
@@ -289,17 +306,20 @@ $("#attackbtn").on("click", function () {
             if (yourHP <= 0) { // you are defeated by the enemy
                 $yourdamage.innerHTML = "";
                 $enemydamage.innerHTML = "";
-                $yourdamage.innerHTML = "You been Defeated GAME OVER!!!"
+                $yourdamage.innerHTML = "You been Defeated GAME OVER!!!";
+                $("#resetbtn").on("click", reset);
+                reset();
+
             }
             else {
                 $yourdamage.innerHTML = "";
                 $enemydamage.innerHTML = "";
-                $yourdamage.innerHTML = "You attacked " + $(youBeat).attr("name") + " for " + yourAP.toString() + " damage."
-                $enemydamage.innerHTML = $(youBeat).attr("name") + " attacked you back for " + enemyCAP.toString() + " damage."
+                $yourdamage.innerHTML = "You attacked " + $(youBeat).attr("name") + " for " + yourAP.toString() + " damage.";
+                $enemydamage.innerHTML = $(youBeat).attr("name") + " attacked you back for " + enemyCAP.toString() + " damage.";
             }
         }
         // your AP increases for the next round
-        yourAP += parseInt($(youPick).attr("APincrease"))
+        yourAP += parseInt($(youPick).attr("APincrease"));
         $(youPick).attr("AP", yourAP.toString());
     }
 })
